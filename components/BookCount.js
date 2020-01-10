@@ -1,15 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
 import { Text, View } from "react-native";
+import PropTypes from "prop-types";
 
-export class BookCount extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={{ fontSize: 20 }}>{this.props.title}</Text>
-        <Text>{this.props.count}</Text>
-      </View>
-    );
-  }
-}
+const BookCount = ({ title, count }) => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
+      <Text style={{ fontSize: 20 }}>{title}</Text>
+      <Text>{count}</Text>
+    </View>
+  );
+};
+
+BookCount.propTypes = {
+  count: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired
+};
 
 export default BookCount;

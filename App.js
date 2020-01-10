@@ -10,8 +10,9 @@ import {
 } from "react-native";
 
 import BookCount from "./components/BookCount";
-
+import CustomActionButton from "./components/CustomActionButton";
 import { Ionicons } from "@expo/vector-icons";
+import color from "./assets/colors";
 
 class App extends React.Component {
   constructor() {
@@ -63,21 +64,15 @@ class App extends React.Component {
       <View style={{ flex: 1, justifyContent: "center", paddingLeft: 5 }}>
         <Text>{item}</Text>
       </View>
-      <TouchableOpacity onPress={() => this.markAsRead(item, index)}>
-        <View
-          style={{
-            width: 100,
-            height: 50,
-            backgroundColor: "#a5deba",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <Text style={{ fontWeight: "bold", color: "white" }}>
-            Mark as Read
-          </Text>
-        </View>
-      </TouchableOpacity>
+      <CustomActionButton
+        onPress={() => this.markAsRead(item, index)}
+        style={{
+          backgroundColor: color.bgSuccess,
+          width: 100
+        }}
+      >
+        <Text style={{ fontWeight: "bold", color: "white" }}>Mark as Read</Text>
+      </CustomActionButton>
     </View>
   );
 
@@ -89,7 +84,7 @@ class App extends React.Component {
           style={{
             height: 70,
             borderBottomWidth: 0.5,
-            borderBottomColor: "#E9E9E9",
+            borderBottomColor: color.borderColor,
             alignItems: "center",
             justifyContent: "center"
           }}
@@ -101,38 +96,23 @@ class App extends React.Component {
             <View style={{ height: 50, flexDirection: "row" }}>
               <TextInput
                 onChangeText={text => this.setState({ textInputData: text })}
-                style={{ flex: 1, backgroundColor: "#ececec", paddingLeft: 5 }}
+                style={{
+                  flex: 1,
+                  backgroundColor: color.bgTextInput,
+                  paddingLeft: 5
+                }}
                 placeholder="Enter Book Name"
                 placeholderTextColor="grey"
               />
-              <TouchableOpacity
+              <CustomActionButton
+                style={{ backgroundColor: color.bgSuccess }}
                 onPress={() => this.addBook(this.state.textInputData)}
               >
-                <View
-                  style={{
-                    width: 50,
-                    height: 50,
-                    backgroundColor: "#a5deba",
-                    justifyContent: "center",
-                    alignItems: "center"
-                  }}
-                >
-                  <Ionicons name="ios-checkmark" color="white" size={40} />
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={this.hideAddNewBook}>
-                <View
-                  style={{
-                    width: 50,
-                    height: 50,
-                    backgroundColor: "#deada5",
-                    justifyContent: "center",
-                    alignItems: "center"
-                  }}
-                >
-                  <Ionicons name="ios-close" color="white" size={40} />
-                </View>
-              </TouchableOpacity>
+                <Ionicons name="ios-checkmark" color="white" size={40} />
+              </CustomActionButton>
+              <CustomActionButton onPress={this.hideAddNewBook}>
+                <Ionicons name="ios-close" color="white" size={40} />
+              </CustomActionButton>
             </View>
           )}
 
@@ -148,30 +128,19 @@ class App extends React.Component {
               </View>
             }
           />
-
-          <TouchableOpacity
+          <CustomActionButton
+            position="right"
             onPress={this.showAddNewBook}
-            style={{ position: "absolute", bottom: 20, right: 20 }}
+            style={{ borderRadius: 25, backgroundColor: color.bgPrimary }}
           >
-            <View
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: 25,
-                backgroundColor: "#AAD1E6",
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-            >
-              <Text style={{ color: "white", fontSize: 30 }}>+</Text>
-            </View>
-          </TouchableOpacity>
+            <Text style={{ color: "white", fontSize: 30 }}>+</Text>
+          </CustomActionButton>
         </View>
         <View
           style={{
             height: 70,
             borderTopWidth: 0.5,
-            borderTopColor: "#E9E9E9",
+            borderTopColor: color.borderColor,
             flexDirection: "row"
           }}
         >
